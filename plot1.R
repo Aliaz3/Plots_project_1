@@ -1,0 +1,6 @@
+full_power<- read.csv("household_power_consumption.txt", header = T, sep = ';', na.strings = "?", nrows = 2075259, check.names = F, stringsAsFactors = F, comment.char = "", quote = '\"')
+full_power$Date<- as.Date(full_power$Date, format = "%d/%m/%Y")
+date_hour_mix <-paste(as.Date(full_power$Date), full_power$Time)
+full_power$Datetime <- as.POSIXct(date_hour_mix)
+power<-subset(full_power, subset = (Date >= "2007-02-01" & Date <= "2007-02-02"))
+hist(power$Global_active_power, col = "red", main = paste("Global Active Power"), xlab = "Global Active Power (kilowatts)")

@@ -1,0 +1,6 @@
+full_power<- read.csv("household_power_consumption.txt", header = T, sep = ';', na.strings = "?", nrows = 2075259, check.names = F, stringsAsFactors = F, comment.char = "", quote = '\"')
+full_power$Date<- as.Date(full_power$Date, format = "%d/%m/%Y")
+power<-subset(full_power, subset = (Date >= "2007-02-01" & Date <= "2007-02-02"))
+datetime<-paste(as.Date(power$Date), power$Time)
+power$Datetime <- as.POSIXct(datetime)
+plot(power$Global_active_power~power$Datetime, type = "l",ylab = "Global Active Power (kilowatts)", xlab = "")
